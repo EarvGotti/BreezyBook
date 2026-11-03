@@ -1,0 +1,155 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="BreezyBook sets up and runs online booking and a WhatsApp assistant for Caribbean small businesses."><title>BreezyBook</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=DM+Sans:wght@400;500;600&display=swap">
+<style>
+html{color-scheme:light dark}body{margin:0}
+/* Layout: sticky nav, two-column hero with a night-timeline card, feature grid, pricing, CTA band. Palette: lagoon blues and palm greens. */
+:root{
+  --bg:#F1FAF9; --surface:#FFFFFF; --alt:#DFF3F0; --fg:#06293A; --muted:#3D6173; --line:#BFE0DC;
+  --blue:#0A6FA8; --teal:#0A9E9A; --palm:#1E9B62; --on-accent:#FFFFFF; --band:#06394F; --band-fg:#EAF8F6;
+  --head:'Bricolage Grotesque',system-ui,sans-serif; --body:'DM Sans',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#04202B; --surface:#0A3042; --alt:#07293A; --fg:#E6F6F4; --muted:#9CC3CB; --line:#154559;
+  --blue:#4BB4EA; --teal:#2CCBC4; --palm:#4DD08F; --on-accent:#032029; --band:#0A4A5E; --band-fg:#EAF8F6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#04202B; --surface:#0A3042; --alt:#07293A; --fg:#E6F6F4; --muted:#9CC3CB; --line:#154559;
+  --blue:#4BB4EA; --teal:#2CCBC4; --palm:#4DD08F; --on-accent:#032029; --band:#0A4A5E; --band-fg:#EAF8F6; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 var(--body);padding-block:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1100px;margin:0 auto}
+h1,h2,h3{font-family:var(--head);line-height:1.1;margin:0 0 12px;text-wrap:balance}
+h1{font-size:clamp(34px,6vw,58px)} h2{font-size:clamp(26px,4vw,38px)} h3{font-size:20px}
+a{color:inherit}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:5;margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.nav-in{display:flex;justify-content:space-between;align-items:center;height:64px;gap:12px}
+.logo{font:700 22px var(--head)} .logo span{color:var(--teal)}
+.links{display:flex;gap:20px;align-items:center}
+.links a{text-decoration:none;font-weight:500}
+.btn{display:inline-block;padding:13px 22px;border-radius:10px;border:0;font:600 16px var(--body);cursor:pointer;text-decoration:none;text-align:center;background:var(--blue);color:var(--on-accent)}
+.btn.green{background:var(--palm)} .btn.sm{padding:9px 16px}
+.btn.ghost{background:transparent;border:2px solid var(--band-fg);color:var(--band-fg)}
+.btn:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:40px;padding-block:56px;align-items:center}
+.eyebrow{color:var(--palm);font-weight:600;margin:0 0 12px}
+.lead{font-size:18px;color:var(--muted);margin:0 0 24px}
+.form{display:flex;gap:10px;flex-wrap:wrap}
+input[type=email]{flex:1;min-width:0;width:100%;max-width:100%;flex-basis:220px;padding:13px 16px;border-radius:10px;border:1px solid var(--line);font:inherit;background:var(--surface);color:var(--fg)}
+.msg{width:100%;margin:0;font-size:14px;color:var(--muted)}
+.callrow{margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.callrow a.link{color:var(--blue);font-weight:600}
+.copy{background:none;border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:5px 10px;font:inherit;font-size:13px;cursor:pointer}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;min-width:0}
+.muted{color:var(--muted)}
+.ev{display:flex;gap:16px;padding:12px 0;border-top:1px solid var(--line);animation:in .6s both}
+.ev .t{min-width:84px;font-weight:600;font-variant-numeric:tabular-nums}
+.ev .t span{display:block;font-size:12px;color:var(--muted);font-weight:400}
+.ev .r{color:var(--palm);font-weight:600;font-size:14px}
+@keyframes in{from{opacity:.2;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.ev{animation:none}}
+.band{background:var(--band);color:var(--band-fg);padding-block:56px;text-align:center;margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.band p{max-width:620px;margin:0 auto 16px;opacity:.85}
+.sec{padding-block:64px}
+.alt{background:var(--alt);margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:20px;margin-top:24px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;position:relative;min-width:0}
+.tile p{margin:0;color:var(--muted)}
+.num{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--alt);color:var(--blue);font-weight:700;margin-bottom:10px}
+.hot{border:2px solid var(--teal)}
+.tag{position:absolute;top:-12px;right:16px;background:var(--teal);color:var(--on-accent);font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px}
+.price{font:700 42px var(--head)} .price small{font:400 16px var(--body);color:var(--muted)}
+.tile ul{padding-left:18px;margin:12px 0 20px}
+.cta{background:linear-gradient(135deg,var(--blue),var(--palm));color:#fff;padding-block:64px;text-align:center;margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.cta .form{justify-content:center;max-width:520px;margin:0 auto 16px}
+.cta .btn.main{background:#fff;color:#06394F}
+.cta .msg{color:#fff}
+footer{padding-block:28px;color:var(--muted);font-size:14px}
+@media(max-width:560px){.links a:not(.btn){display:none}}
+</style></head><body>
+
+<nav><div class="wrap nav-in">
+  <span class="logo">Breezy<span>Book</span></span>
+  <div class="links"><a href="#features">Features</a><a href="#pricing">Pricing</a><a class="btn sm" href="#call">Book a call</a></div>
+</div></nav>
+
+<main class="wrap">
+<header class="hero">
+  <div>
+    <p class="eyebrow">Booking, handled. For Caribbean small businesses.</p>
+    <h1>Your calendar fills up while you work, or sleep.</h1>
+    <p class="lead">BreezyBook sets up and runs online booking and a WhatsApp assistant for your salon, studio or service business. You focus on clients. We handle the tech.</p>
+    <form class="form" data-form><input type="email" id="email1" required placeholder="you@yourbusiness.com" aria-label="Email"><button class="btn green" type="submit">Get early access</button><p class="msg" role="status"></p></form>
+    <div class="callrow" id="call"><a class="link" href="mailto:hello@breezybookme.com?subject=BreezyBook%20intro%20call">Prefer to talk? Book an intro call →</a><span class="muted">hello@breezybookme.com</span><button class="copy" type="button" data-copy="hello@breezybookme.com">Copy</button></div>
+  </div>
+  <div class="card">
+    <h3>While you were closed</h3>
+    <p class="muted" style="margin-top:0">Illustrative example</p>
+    <div class="ev" style="animation-delay:.2s"><div class="t">9:14 PM<span>WhatsApp</span></div><div><div>“Anything open Saturday afternoon?”</div><div class="r">Booked · Sat 2:00 PM · Braids</div></div></div>
+    <div class="ev" style="animation-delay:.6s"><div class="t">10:40 PM<span>Booking page</span></div><div><div>New client picked a time themselves</div><div class="r">Booked · Mon 10:30 AM · Haircut</div></div></div>
+    <div class="ev" style="animation-delay:1s"><div class="t">11:52 PM<span>Cancellation</span></div><div><div>A client can't make Thursday</div><div class="r">Slot offered to waitlist · Filled</div></div></div>
+    <div class="ev" style="animation-delay:1.4s"><div class="t">7:00 AM<span>Reminders</span></div><div><div>Tomorrow's appointments</div><div class="r">Confirmations sent to every client</div></div></div>
+  </div>
+</header>
+</main>
+
+<section class="band"><div class="wrap">
+  <h2>Every missed message is a missed booking.</h2>
+  <p>Phone tag, DMs at midnight, no-shows and clients who quietly drift away. BreezyBook handles all of it in the background.</p>
+</div></section>
+
+<section id="features" class="wrap sec">
+  <h2>Everything a busy owner needs</h2>
+  <div class="grid">
+    <div class="tile"><h3>Your own booking page</h3><p>A branded page on your own domain. Clients pick a time in seconds.</p></div>
+    <div class="tile"><h3>24/7 WhatsApp assistant</h3><p>Answers questions and books clients while you're with someone else or asleep.</p></div>
+    <div class="tile"><h3>Fewer no-shows</h3><p>Automatic reminders and a waitlist that refills cancelled slots.</p></div>
+    <div class="tile"><h3>Win lapsed clients back</h3><p>Friendly nudges to people who haven't booked in a while.</p></div>
+    <div class="tile"><h3>Weekly insights</h3><p>A plain-English summary of what's busy, what's quiet and what to do next.</p></div>
+    <div class="tile"><h3>Reviews on autopilot</h3><p>Happy clients are asked for a review at the right moment (Premium).</p></div>
+  </div>
+</section>
+
+<section class="alt sec"><div class="wrap">
+  <h2>Set up in three steps</h2>
+  <div class="grid">
+    <div class="tile"><span class="num">1</span><h3>We learn your business</h3><p>Services, hours, prices and how you talk to clients.</p></div>
+    <div class="tile"><span class="num">2</span><h3>We build and brand it</h3><p>Booking page, WhatsApp assistant and reminders, set up for you.</p></div>
+    <div class="tile"><span class="num">3</span><h3>You go live</h3><p>Share your link. We handle the tech and keep it running.</p></div>
+  </div>
+</div></section>
+
+<section id="pricing" class="wrap sec">
+  <h2>Simple pricing</h2>
+  <p class="muted">One-time setup plus a monthly fee. Prices in USD.</p>
+  <div class="grid">
+    <div class="tile"><h3>Starter</h3><div class="price">$85<small>/mo</small></div><p>$299 one-time setup</p><ul><li>Branded booking page</li><li>Automatic reminders</li><li>Email support</li></ul><a class="btn" href="#call">Book a call</a></div>
+    <div class="tile hot"><span class="tag">Most popular</span><h3>Standard</h3><div class="price">$150<small>/mo</small></div><p>$449 one-time setup</p><ul><li>Everything in Starter</li><li>24/7 WhatsApp assistant</li><li>Waitlist and no-show reduction</li><li>Lapsed-client re-engagement</li></ul><a class="btn green" href="#call">Book a call</a></div>
+    <div class="tile"><h3>Premium</h3><div class="price">$225<small>/mo</small></div><p>$699 one-time setup</p><ul><li>Everything in Standard</li><li>Weekly AI insights</li><li>Automated review requests</li><li>Priority support</li></ul><a class="btn" href="#call">Book a call</a></div>
+  </div>
+</section>
+
+<section class="cta"><div class="wrap">
+  <h2>Ready for a calmer calendar?</h2>
+  <p>Join the early-access list, or email us and we'll walk you through it.</p>
+  <form class="form" data-form><input type="email" id="email2" required placeholder="you@yourbusiness.com" aria-label="Email"><button class="btn main" type="submit">Join the list</button><p class="msg" role="status"></p></form>
+  <a class="btn ghost" href="#call">Book a call</a>
+</div></section>
+
+<footer class="wrap">© 2026 BreezyBook · www.breezybookme.com</footer>
+
+<script>
+document.querySelectorAll("[data-form]").forEach(function(f){
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var msg=f.querySelector(".msg"), email=f.querySelector("input").value.trim();
+    msg.textContent="Joining…";
+    fetch("/.netlify/functions/subscribe",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email})})
+      .then(function(r){if(!r.ok)throw 0;msg.textContent="You're on the list. We'll be in touch soon.";f.querySelector("input").value=""})
+      .catch(function(){msg.textContent="Something went wrong. Please try again."});
+  });
+});
+document.querySelectorAll("[data-copy]").forEach(function(b){
+  b.addEventListener("click",function(){
+    try{navigator.clipboard.writeText(b.dataset.copy).then(function(){b.textContent="Copied"},function(){b.textContent="Select and copy"})}catch(e){b.textContent="Select and copy"}
+  });
+});
+</script></body></html>
